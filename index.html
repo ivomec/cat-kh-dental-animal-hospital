@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💖치과 특화 금호동물병원 통합 안내 대시보드💖</title>
+    <title>💖고양이 치과 특화 금호동물병원 보호자 안내💖</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
         
         /* --- 기본 & 애니메이션 스타일 --- */
         @keyframes heartbeat { 0%{transform:scale(1)} 50%{transform:scale(1.07);text-shadow:0 0 15px rgba(255,82,82,.7)} 100%{transform:scale(1)} }
         @keyframes pulse { 0%{transform:scale(1)} 50%{transform:scale(1.05);text-shadow:0 0 15px rgba(255,107,107,.7)} 100%{transform:scale(1)} }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         body {
             font-family: 'Noto Sans KR', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f3ff; /* 전체 배경색 */
+            background-color: #f5f3ff;
             color: #333;
             -webkit-font-smoothing: antialiased;
         }
@@ -61,45 +62,37 @@
         #tab-addons.active { background: linear-gradient(135deg, #f8bbd0, #b39ddb); }
         #tab-nerve.active { background: linear-gradient(135deg, #ff9a44, #ff5e62); }
 
-
         /* --- 콘텐츠 패널 스타일 --- */
         .content-panel { display: none; }
         .content-panel.active { display: block; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        /* --- 정보 안내 페이지 공통 스타일 --- */
+        .info-page header { padding: 40px 20px; border-radius: 25px; text-align: center; margin-bottom: 30px; border: 3px solid white; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .info-page header h1 { margin: 0; font-size: 2.5em; font-weight: 900; }
+        .info-page header p { margin: 10px 0 0; font-size: 1.2em; opacity: 0.95; }
+        .info-page .info-section, .info-page .pride-section, .info-page .explanation-box, .info-page .cost-grid, .info-page .package-grid { margin-top: 20px; }
+        .info-page .info-section h2, .info-page .pride-section h2, .info-page .explanation-box h2, .info-page .important-notice h2 { font-size: 1.8em; font-weight: 700; margin-top: 0; margin-bottom: 20px; text-align: center; }
+        .info-page .cost-grid, .info-page .package-grid, .info-page .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .info-page .cost-card, .info-page .package-card, .info-page .info-card { background-color: #fff; border-radius: 20px; box-shadow: 0 6px 25px rgba(0,0,0,0.08); padding: 25px; display: flex; flex-direction: column; transition: transform 0.3s; border-top: 8px solid transparent;}
+        .info-page .cost-card:hover, .info-page .package-card:hover { transform: translateY(-8px); }
+        .info-page .cost-card h3, .info-page .package-card h3, .info-page .info-card h3 { font-size: 1.6em; margin: 0 0 20px 0; text-align: center; font-weight: 700; }
+        .info-page ul { list-style: none; padding: 0; flex-grow: 1; }
+        .info-page .price-wrapper { text-align: center; border-top: 2px dashed #eee; padding-top: 20px; }
+        .info-page .price-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 1.1em; }
+        .info-page .price-label { color: #444; }
+        .info-page .price-value { font-weight: 700; }
+        .info-page .original-price { font-size: 1.2em; color: #aaa; text-decoration: line-through; display: block; }
+        .info-page .discount-price { font-weight: 900; display: inline-block; margin-top: 5px; }
+        .info-page .discount-price.heartbeat { font-size: 2.5em; color: #ff5252; animation: heartbeat 1.5s infinite; }
+        .info-page .discount-price.pulse { font-size: 2.5em; color: #ff52a5; animation: pulse 2s infinite; }
+        .info-page .explanation-box { padding: 25px; border-radius: 15px; border-left: 8px solid; }
+        .info-page footer { text-align: center; padding: 30px 15px; margin-top: 30px; }
+        .info-page .action-button { display: block; width: 80%; max-width: 400px; margin: 15px auto; padding: 18px; border-radius: 15px; text-decoration: none; color: white; font-size: 1.3em; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; }
+        .info-page .action-button:hover { transform: scale(1.05); }
+        .info-page .kakao-btn { background-color: #FEE500; color: #3C1E1E; }
+        .info-page .tel-btn { background-color: #4CAF50; }
 
-        /* --- 개별 페이지 공통 스타일 --- */
-        header { padding: 40px 20px; border-radius: 25px; text-align: center; margin-bottom: 30px; border: 3px solid white; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
-        header h1 { margin: 0; font-size: 2.5em; font-weight: 900; }
-        header p { margin: 10px 0 0; font-size: 1.2em; opacity: 0.95; }
-        .info-section, .pride-section, .explanation-box, .cost-grid, .package-grid { margin-top: 20px; }
-        .info-section h2, .pride-section h2, .explanation-box h2, .important-notice h2 { font-size: 1.8em; font-weight: 700; margin-top: 0; margin-bottom: 20px; text-align: center; }
-        .cost-grid, .package-grid, .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .cost-card, .package-card, .info-card { background-color: #fff; border-radius: 20px; box-shadow: 0 6px 25px rgba(0,0,0,0.08); padding: 25px; display: flex; flex-direction: column; transition: transform 0.3s; border-top: 8px solid transparent;}
-        .cost-card:hover, .package-card:hover { transform: translateY(-8px); }
-        .cost-card h3, .package-card h3, .info-card h3 { font-size: 1.6em; margin: 0 0 20px 0; text-align: center; font-weight: 700; }
-        ul { list-style: none; padding: 0; flex-grow: 1; }
-        .price-wrapper { text-align: center; border-top: 2px dashed #eee; padding-top: 20px; }
-        .price-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 1.1em; }
-        .price-label { color: #444; }
-        .price-value { font-weight: 700; }
-        .original-price { font-size: 1.2em; color: #aaa; text-decoration: line-through; display: block; }
-        .discount-price { font-weight: 900; display: inline-block; margin-top: 5px; }
-        .discount-price.heartbeat { font-size: 2.5em; color: #ff5252; animation: heartbeat 1.5s infinite; }
-        .discount-price.pulse { font-size: 2.5em; color: #ff52a5; animation: pulse 2s infinite; }
-        .explanation-box { padding: 25px; border-radius: 15px; border-left: 8px solid; }
-        footer { text-align: center; padding: 30px 15px; margin-top: 30px; }
-        .action-button { display: block; width: 80%; max-width: 400px; margin: 15px auto; padding: 18px; border-radius: 15px; text-decoration: none; color: white; font-size: 1.3em; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; }
-        .action-button:hover { transform: scale(1.05); }
-        .kakao-btn { background-color: #FEE500; color: #3C1E1E; }
-        .tel-btn { background-color: #4CAF50; }
-
-        /* --- 새로 추가된 중요 안내 섹션 스타일 --- */
-        .important-notice {
-            background: #fff5f5;
-            border-left: 8px solid #fa5252;
-            padding: 25px;
-            margin-bottom: 30px;
-        }
+        .important-notice { background: #fff5f5; border-left: 8px solid #fa5252; padding: 25px; margin-bottom: 30px; border-radius:15px; }
         .important-notice h2 { color: #c92a2a; }
         .important-notice ol { padding-left: 25px; }
         .important-notice li { margin-bottom: 22px; line-height: 1.7; font-size: 1.05em; }
@@ -108,9 +101,7 @@
         .important-notice .sub-list { padding-left: 20px; list-style-type: '✅ '; margin-top: 10px; font-size: 0.95em; color: #555;}
         .important-notice .sub-list li { margin-bottom: 8px;}
 
-
         /* --- 페이지별 고유 스타일 --- */
-        /* 헤더 배경 */
         #content-main header { background: linear-gradient(135deg, #81c7f5, #a092ed); }
         #content-healthcheck header { background: linear-gradient(135deg, #69f0ae, #00e5ff); }
         #content-scaling header { background: linear-gradient(135deg, #ff9a9e, #a1c4fd); }
@@ -118,14 +109,7 @@
         #content-addons header { background: linear-gradient(135deg, #f8bbd0, #b39ddb); }
         #content-nerve header { background: linear-gradient(135deg, #ff9a44, #ff5e62); }
 
-        /* 발치비용 카드별 색상 */
-        #content-extraction #card-root1 { border-top-color: #ff7eb9; } #content-extraction #card-root1 h3 { color: #ff7eb9; }
-        #content-extraction #card-root2 { border-top-color: #ff922b; } #content-extraction #card-root2 h3 { color: #ff922b; }
-        #content-extraction #card-root3 { border-top-color: #f76707; } #content-extraction #card-root3 h3 { color: #f76707; }
-        #content-extraction #card-canine { border-top-color: #22b8cf; } #content-extraction #card-canine h3 { color: #22b8cf; }
-        #content-extraction #card-molar { border-top-color: #845ef7; } #content-extraction #card-molar h3 { color: #845ef7; }
-        #content-extraction #card-forl { border-top-color: #f06595; } #content-extraction #card-forl h3 { color: #f06595; }
-        #content-extraction #card-remains { border-top-color: #66d9e8; } #content-extraction #card-remains h3 { color: #66d9e8; }
+        #content-extraction .cost-card { border-top-color: #a5d8ff; }
         #content-extraction .price-value { color: #e64980; font-size: 1.2em; }
         #content-extraction .explanation-box { background: #fff0f6; border-left-color: #ff87c2; }
         #content-extraction .explanation-box h2 { color: #c2255c; }
@@ -144,81 +128,101 @@
 
     <div class="dashboard-content">
 
-        <div id="content-main" class="content-panel">
+        <div id="content-main" class="content-panel info-page">
             <div class="container">
-                <header id="main-header"></header>
+                <header>
+                    <h1 id="main-header-title"></h1>
+                    <p id="main-header-subtitle"></p>
+                </header>
                 <main>
-                    <section class="info-section">
-                        <h2>🏥 병원 안내 🏥</h2>
-                        <div id="main-info-grid" class="info-grid"></div>
-                    </section>
-                    <section id="main-pride-section" class="pride-section" style="background:#e3f2fd; padding: 25px; border-radius: 20px; margin-top: 30px;"></section>
-                    <section class="important-notice" style="margin-top: 30px;">
-                        <h2 id="main-notice-title"></h2>
-                        <ol id="main-notice-list"></ol>
-                    </section>
+                    <!-- JavaScript가 이 영역을 채웁니다 -->
                 </main>
                 <footer id="main-footer"></footer>
             </div>
         </div>
 
-        <div id="content-healthcheck" class="content-panel">
+        <div id="content-healthcheck" class="content-panel info-page">
             <div class="container">
-                 <header id="healthcheck-header"></header>
-                 <div id="healthcheck-packages" class="package-grid"></div>
-                 <div class="explanation-box" style="background:#f1f8e9;border-left-color:#aed581">
-                    <h2 id="healthcheck-explanation-title"></h2>
-                    <div id="healthcheck-explanation-content"></div>
-                 </div>
+                 <header>
+                    <h1 id="healthcheck-header-title"></h1>
+                    <p id="healthcheck-header-subtitle"></p>
+                 </header>
+                 <main>
+                    <div class="package-grid" id="healthcheck-packages"></div>
+                    <div class="explanation-box" style="background:#f1f8e9;border-left-color:#aed581">
+                        <h2 id="healthcheck-explanation-title"></h2>
+                        <div id="healthcheck-explanation-content"></div>
+                    </div>
+                 </main>
             </div>
         </div>
 
-        <div id="content-scaling" class="content-panel">
+        <div id="content-scaling" class="content-panel info-page">
             <div class="container">
-                <header id="scaling-header"></header>
-                <div id="scaling-packages" class="package-grid"></div>
-                <div class="explanation-box" style="background:#fffde7;border-left-color:#fdd835">
-                   <h2 id="scaling-explanation-title"></h2>
-                   <div id="scaling-explanation-content"></div>
-                </div>
+                 <header>
+                    <h1 id="scaling-header-title"></h1>
+                    <p id="scaling-header-subtitle"></p>
+                 </header>
+                 <main>
+                    <div class="package-grid" id="scaling-packages"></div>
+                    <div class="explanation-box" style="background:#fffde7;border-left-color:#fdd835">
+                        <h2 id="scaling-explanation-title"></h2>
+                        <div id="scaling-explanation-content"></div>
+                    </div>
+                 </main>
             </div>
         </div>
         
-        <div id="content-extraction" class="content-panel">
+        <div id="content-extraction" class="content-panel info-page">
             <div class="container">
-                <header id="extraction-header"></header>
-                <div id="extraction-costs" class="cost-grid"></div>
-                <div class="explanation-box">
-                    <h2 id="extraction-explanation-title"></h2>
-                    <div id="extraction-explanation-content"></div>
-                </div>
+                <header>
+                    <h1 id="extraction-header-title"></h1>
+                    <p id="extraction-header-subtitle"></p>
+                </header>
+                <main>
+                    <div class="cost-grid" id="extraction-costs"></div>
+                    <div class="explanation-box">
+                        <h2 id="extraction-explanation-title"></h2>
+                        <div id="extraction-explanation-content"></div>
+                    </div>
+                </main>
             </div>
         </div>
 
-        <div id="content-addons" class="content-panel">
+        <div id="content-addons" class="content-panel info-page">
             <div class="container">
-                <header id="addons-header"></header>
-                <div id="addons-costs" class="cost-grid"></div>
-                <div class="explanation-box" style="background:#e1f5fe;border-left-color:#4fc3f7">
-                   <h2 id="addons-explanation-title"></h2>
-                   <div id="addons-explanation-content"></div>
-                </div>
+                 <header>
+                    <h1 id="addons-header-title"></h1>
+                    <p id="addons-header-subtitle"></p>
+                 </header>
+                 <main>
+                    <div class="cost-grid" id="addons-costs"></div>
+                    <div class="explanation-box" style="background:#e1f5fe;border-left-color:#4fc3f7">
+                        <h2 id="addons-explanation-title"></h2>
+                        <div id="addons-explanation-content"></div>
+                    </div>
+                 </main>
             </div>
         </div>
         
-        <div id="content-nerve" class="content-panel">
+        <div id="content-nerve" class="content-panel info-page">
             <div class="container">
-                <header id="nerve-header"></header>
-                <div id="nerve-costs" class="cost-grid"></div>
-                <div class="explanation-box" style="background:#e3fafc;border-left-color:#66d9e8">
-                   <h2 id="nerve-explanation-title"></h2>
-                   <div id="nerve-explanation-content"></div>
-                </div>
+                <header>
+                    <h1 id="nerve-header-title"></h1>
+                    <p id="nerve-header-subtitle"></p>
+                </header>
+                <main>
+                    <div class="cost-grid" id="nerve-costs"></div>
+                    <div class="explanation-box" style="background:#e3fafc;border-left-color:#66d9e8">
+                        <h2 id="nerve-explanation-title"></h2>
+                        <div id="nerve-explanation-content"></div>
+                    </div>
+                </main>
             </div>
         </div>
 
     </div>
-
+    
     <script src="script.js" defer></script>
 
 </body>
