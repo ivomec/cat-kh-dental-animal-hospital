@@ -58,7 +58,7 @@
         }
         /* 각 탭 활성화 시 색상 */
         #tab-main.active { background: linear-gradient(135deg, #81c7f5, #a092ed); }
-        #tab-process.active { background: linear-gradient(135deg, #f6d365, #fda085); }
+        #tab-procedure.active { background: linear-gradient(135deg, #84fab0, #8fd3f4); } /* 수술과정 탭 색상 */
         #tab-healthcheck.active { background: linear-gradient(135deg, #69f0ae, #00e5ff); }
         #tab-scaling.active { background: linear-gradient(135deg, #ff9a9e, #a1c4fd); }
         #tab-surgery.active { background: linear-gradient(135deg, #89f7fe, #66a6ff); }
@@ -132,22 +132,72 @@
 
         /* --- 페이지별 고유 스타일 --- */
         #content-main header { background: linear-gradient(135deg, #81c7f5, #a092ed); }
-        #content-process header { background: linear-gradient(135deg, #f6d365, #fda085); }
+        #content-procedure header { background: linear-gradient(135deg, #84fab0, #8fd3f4); } 
         #content-healthcheck header { background: linear-gradient(135deg, #69f0ae, #00e5ff); }
         #content-scaling header { background: linear-gradient(135deg, #ff9a9e, #a1c4fd); }
         #content-surgery header { background: linear-gradient(135deg, #89f7fe, #66a6ff); }
         #content-addons header { background: linear-gradient(135deg, #f8bbd0, #b39ddb); }
         #content-nerve header { background: linear-gradient(135deg, #ff9a44, #ff5e62); }
 
-        /* --- 수술 과정 타임라인 스타일 --- */
-        .timeline-container { border-left: 3px solid #fda085; padding: 20px 0 20px 30px; margin: 20px 0; }
-        .timeline-item { display: flex; align-items: flex-start; position: relative; margin-bottom: 30px; }
-        .timeline-item::before { content: ''; width: 15px; height: 15px; background-color: white; border: 3px solid #fda085; border-radius: 50%; position: absolute; left: -39px; top: 5px; }
-        .timeline-time { flex-shrink: 0; width: 100px; font-weight: 900; color: #555; font-size: 1.2em; }
-        .timeline-icon { margin: -5px 20px 0; font-size: 2.5em; }
-        .timeline-content { background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.07); width: 100%; }
-        .timeline-content h3 { margin: 0 0 10px; font-size: 1.4em; color: #333; }
-        .timeline-content p { margin: 0; line-height: 1.6; }
+        /* --- [수정] 강아지 차트의 수술 과정 타임라인 스타일 --- */
+        .procedure-timeline {
+            position: relative;
+            padding: 20px 0;
+            margin-top: 20px;
+        }
+        .procedure-timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 55px;
+        }
+        .timeline-item::before {
+            content: attr(data-step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #84fab0;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .timeline-item h3 {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #00796b;
+            margin-bottom: 8px;
+            padding-top: 8px;
+        }
+        .timeline-item .timeline-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            line-height: 1.7;
+            margin-top: 0;
+            border-left: 5px solid #84fab0;
+        }
+        .timeline-item strong {
+            color: #d84315;
+            font-weight: 700;
+        }
 
         #content-surgery .price-value { color: #e64980; font-size: 1.2em; }
         #content-surgery .explanation-box { background: #fff0f6; border-left-color: #ff87c2; }
@@ -183,13 +233,13 @@
 <body>
     <!-- 데스크톱용 상단 탭 -->
     <nav class="dashboard-nav dashboard-nav-top">
-        <a href="#" class="nav-tab" id="tab-main" data-target="content-main">💖 병원소개</a>
-        <a href="#" class="nav-tab" id="tab-process" data-target="content-process">💡 수술과정</a>
-        <a href="#" class="nav-tab" id="tab-healthcheck" data-target="content-healthcheck">🩺 건강검진</a>
-        <a href="#" class="nav-tab" id="tab-scaling" data-target="content-scaling">🦷 스케일링</a>
-        <a href="#" class="nav-tab" id="tab-surgery" data-target="content-surgery">😿 수술비용</a>
-        <a href="#" class="nav-tab" id="tab-addons" data-target="content-addons">💊 추가처치</a>
-        <a href="#" class="nav-tab" id="tab-nerve" data-target="content-nerve">❤️‍🩹 신경/보존</a>
+        <a href="#" class="nav-tab" data-target="content-main">💖 병원소개</a>
+        <a href="#" class="nav-tab" data-target="content-procedure">🏥 수술 과정</a>
+        <a href="#" class="nav-tab" data-target="content-healthcheck">🩺 건강검진</a>
+        <a href="#" class="nav-tab" data-target="content-scaling">🦷 스케일링</a>
+        <a href="#" class="nav-tab" data-target="content-surgery">😿 수술비용</a>
+        <a href="#" class="nav-tab" data-target="content-addons">💊 추가처치</a>
+        <a href="#" class="nav-tab" data-target="content-nerve">❤️‍🩹 신경/보존</a>
     </nav>
 
     <div class="dashboard-content">
@@ -206,13 +256,18 @@
             </div>
         </div>
 
-        <div id="content-process" class="content-panel info-page">
+        <!-- [수정] 수술 과정 탭의 ID와 내부 구조를 강아지 차트와 동일하게 변경 -->
+        <div id="content-procedure" class="content-panel info-page">
             <div class="container">
                 <header>
-                    <h1 id="process-header-title"></h1>
-                    <p id="process-header-subtitle"></p>
+                    <h1>🏥 우리 아이 치과 수술, 이렇게 진행돼요!</h1>
+                    <p>보호자님께서 안심하실 수 있도록, 모든 과정을 투명하게 안내해 드립니다 ❤️</p>
                 </header>
-                <main id="process-content-area">
+                <main>
+                    <a href="https://www.youtube.com/watch?v=_mk6qOF7OEs" target="_blank" class="action-button" style="background-color: #FF0000; margin-bottom: 25px;">🎥 영상으로 한눈에 보기</a>
+                    <div class="procedure-timeline">
+                        <!-- 이 부분은 script.js에 의해 동적으로 채워집니다. -->
+                    </div>
                 </main>
             </div>
         </div>
@@ -257,7 +312,7 @@
 
                 <div class="explanation-box" style="margin-bottom: 30px; background: #e3f2fd; border-left-color: #1976d2; text-align: center;">
                     <h2 style="color: #1976d2;">🦷 우리 아이 치아 위치 가이드</h2>
-                    <img src="https://github.com/ivomec/image/blob/main/%EC%B9%98%EC%8B%9D.jpg?raw=true" alt="고양이 치아 번호 안내" style="width: 100%; max-width: 600px; border-radius: 10px; display: block; margin: 15px auto;">
+                    <img src="https://github.com/ivomec/image/blob/main/%EC%B9%98%EC%B9%9D.jpg?raw=true" alt="고양이 치아 번호 안내" style="width: 100%; max-width: 600px; border-radius: 10px; display: block; margin: 15px auto;">
                     <p style="margin: 15px 0 0 0; text-align: center;">
                         아래 비용표에 나오는 송곳니, 열육치(가장 큰 앞쪽 어금니), 대구치(가장 큰 뒤쪽 어금니) 등의 위치를 그림으로 확인해 보세요! 😊<br>
                         우리 아이의 어떤 치아를 치료하는지 위치를 알면 내용을 이해하시는 데 훨씬 도움이 될 거예요.
@@ -303,13 +358,13 @@
     
     <!-- 모바일용 하단 탭 -->
     <nav class="dashboard-nav dashboard-nav-bottom">
-        <a href="#" class="nav-tab" id="tab-main" data-target="content-main">💖 병원소개</a>
-        <a href="#" class="nav-tab" id="tab-process" data-target="content-process">💡 수술과정</a>
-        <a href="#" class="nav-tab" id="tab-healthcheck" data-target="content-healthcheck">🩺 건강검진</a>
-        <a href="#" class="nav-tab" id="tab-scaling" data-target="content-scaling">🦷 스케일링</a>
-        <a href="#" class="nav-tab" id="tab-surgery" data-target="content-surgery">😿 수술비용</a>
-        <a href="#" class="nav-tab" id="tab-addons" data-target="content-addons">💊 추가처치</a>
-        <a href="#" class="nav-tab" id="tab-nerve" data-target="content-nerve">❤️‍🩹 신경/보존</a>
+        <a href="#" class="nav-tab" data-target="content-main">💖 병원소개</a>
+        <a href="#" class="nav-tab" data-target="content-procedure">🏥 수술 과정</a>
+        <a href="#" class="nav-tab" data-target="content-healthcheck">🩺 건강검진</a>
+        <a href="#" class="nav-tab" data-target="content-scaling">🦷 스케일링</a>
+        <a href="#" class="nav-tab" data-target="content-surgery">😿 수술비용</a>
+        <a href="#" class="nav-tab" data-target="content-addons">💊 추가처치</a>
+        <a href="#" class="nav-tab" data-target="content-nerve">❤️‍🩹 신경/보존</a>
     </nav>
     
     <script src="script.js" defer></script>
