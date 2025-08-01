@@ -1,5 +1,6 @@
 /*
-  [v3.0 통합 대시보드 - 고양이]
+  [v3.1 통합 대시보드 - 고양이]
+  - UI 개선: 수술과정 탭의 타임라인을 모바일에서 세로형 레이아웃으로 변경하여 가독성 향상
   - 기능 변경: 계산기, 예상비용, 보호자용 치료내역 탭 및 관련 기능 전체 제거
   - UI 지원: 데스크톱(상단 탭)과 모바일(하단 탭) 반응형 UI 완벽 지원
   - 이전 업데이트 내역 모두 포함
@@ -100,7 +101,15 @@ function populateAllTabs(data) {
         const processContent = document.getElementById('process-content-area');
         let contentHTML = `<a href="${data.process.youtubeLink}" target="_blank" class="action-button" style="background-color: #FF0000; margin-bottom: 25px;">🎥 영상으로 한눈에 보기</a>`;
         if (data.process.timeline) {
-            contentHTML += `<div class="info-section" style="margin-top:40px;"><h2 style="color: #333;">${data.process.timeline.title}</h2><div class="timeline-container">${data.process.timeline.steps.map(step => `<div class="timeline-item"><div class="timeline-time">${step.time}</div><div class="timeline-icon">${step.icon}</div><div class="timeline-content"><h3>${step.title}</h3><p>${step.description}</p></div></div>`).join('')}</div></div>`;
+            // [수정] timeline-item 내부 구조 변경: icon을 h3 안으로 이동
+            contentHTML += `<div class="info-section" style="margin-top:40px;"><h2 style="color: #333;">${data.process.timeline.title}</h2><div class="timeline-container">${data.process.timeline.steps.map(step => `
+                <div class="timeline-item">
+                    <div class="timeline-time">${step.time}</div>
+                    <div class="timeline-content">
+                        <h3>${step.icon} ${step.title}</h3>
+                        <p>${step.description}</p>
+                    </div>
+                </div>`).join('')}</div></div>`;
         }
         processContent.innerHTML = contentHTML;
     }
